@@ -74,7 +74,7 @@ public class bookLibrary {
         }
         int stt = 1;
         if (count > 0) {
-            System.out.println("Thông tin các cuốn sách:");
+            System.out.println("Thông tin loại sách này.");
             System.out.println("+-----+--------------------------+-----------------------+------------------+---------+--------------+------------+-------------+---------------+");
             System.out.println("| STT |          Tên             |     Thể loại          |   Nhà xuất bản   | Tái bản |  Mã số sách  | Giá tiền   |  Trạng thái | Ngày xuất bản |");
             System.out.println("+-----+--------------------------+-----------------------+------------------+---------+--------------+------------+-------------+---------------+");
