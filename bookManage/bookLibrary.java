@@ -72,13 +72,35 @@ public class bookLibrary {
                 System.out.println("Số lượng sách khác: " + count);
                 break;
         }
+        int stt = 1;
         if (count > 0) {
             System.out.println("Thông tin các cuốn sách:");
+            System.out.println("+-----+--------------------------+-----------------------+------------------+---------+--------------+------------+-------------+---------------+");
+            System.out.println("| STT |          Tên             |     Thể loại          |   Nhà xuất bản   | Tái bản |  Mã số sách  | Giá tiền   |  Trạng thái | Ngày xuất bản |");
+            System.out.println("+-----+--------------------------+-----------------------+------------------+---------+--------------+------------+-------------+---------------+");
             ArrayList<BookInput> books = bookInventory.getOrDefault(bookType, new ArrayList<>());
             for (BookInput book : books) {
-                book.output();
-                System.out.println();
+                String tieuDe = "";
+                if (book instanceof tieuThuyet) {
+                    tieuDe = ((tieuThuyet) book).getTieuDe();
+                } else if (book instanceof hoiKi) {
+                    tieuDe = ((hoiKi) book).getTieuDe();
+                } else if (book instanceof kyNangSong) {
+                    tieuDe = ((kyNangSong) book).getTieuDe();
+                } else if (book instanceof khoaHocvaKienThuc) {
+                    tieuDe = ((khoaHocvaKienThuc) book).getTieuDe();
+                } else if (book instanceof sachThieuNhi) {
+                    tieuDe = ((sachThieuNhi) book).getTieuDe();
+                } else if (book instanceof sachKhac) {
+                    tieuDe = ((sachKhac) book).getTieuDe();
+                }
+                System.out.printf("| %-4d| %-25s| %-22s| %-17s| %-8d| %-13s| %-11s| %-12s| %-14s|%n",
+                stt++, tieuDe, getTypeName(bookType), book.getNhaXuatBan(), book.getSoLanTaiBan(),
+                book.getIdSach(), formatGiaTien(book.getGiaTien())+ "đ",
+                book.getStatus(), book.getNgayXuatBan().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
             }
+            System.out.println("+-----+--------------------------+-----------------------+------------------+---------+--------------+------------+-------------+---------------+");
+
         } else {
             System.out.println("Không có loại sách này.");
         }
@@ -108,14 +130,14 @@ public class bookLibrary {
                 } else if (book instanceof kyNangSong) {
                     tieuDe = ((kyNangSong) book).getTieuDe();
                 } else if (book instanceof khoaHocvaKienThuc) {
-                    tieuDe = "Không có"; // Không có tiêu đề cho loại sách này
+                    tieuDe = ((khoaHocvaKienThuc) book).getTieuDe();
                 } else if (book instanceof sachThieuNhi) {
                     tieuDe = ((sachThieuNhi) book).getTieuDe();
                 } else if (book instanceof sachKhac) {
                     tieuDe = ((sachKhac) book).getTieuDe();
                 }
 
-                System.out.printf("|  %-3d| %-25s| %-22s| %-17s| %-8d| %-13s| %-11s| %-12s| %-14s|%n",
+                System.out.printf("| %-4d| %-25s| %-22s| %-17s| %-8d| %-13s| %-11s| %-12s| %-14s|%n",
                         stt++, tieuDe, getTypeName(type), book.getNhaXuatBan(), book.getSoLanTaiBan(),
                         book.getIdSach(), formatGiaTien(book.getGiaTien())+ "đ",
                         book.getStatus(), book.getNgayXuatBan().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
