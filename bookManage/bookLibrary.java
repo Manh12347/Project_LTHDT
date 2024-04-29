@@ -1,10 +1,12 @@
 package bookManage;
 
+import bookManage.MemoryDemo;
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.text.DecimalFormat;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class bookLibrary {
@@ -20,6 +22,8 @@ public class bookLibrary {
         bookInventory.put("sachthieunhi", new ArrayList<>());
         bookInventory.put("sachkhac", new ArrayList<>());
         sc = new Scanner(System.in);
+
+        MemoryDemo.addPredefinedBooks(this);
     }
 
     public void countBook(String bookType, BookInput book) {
@@ -169,6 +173,15 @@ public class bookLibrary {
     }
 
     public void addBook() {
+        tieuThuyet predefinedTieuThuyet = new tieuThuyet("Tiêu đề sách tiểu thuyết");
+        predefinedTieuThuyet.setIdSach("123456");
+        predefinedTieuThuyet.setNhaXuatBan("Kim Đồng");
+        predefinedTieuThuyet.setSoLanTaiBan(2);
+        predefinedTieuThuyet.setGiaTien(50000);
+        predefinedTieuThuyet.setNgayXuatBan(LocalDate.parse("01/01/2022", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        predefinedTieuThuyet.setStatus(Status.NOT_LENT_YET);
+        countBook("tieuthuyet", predefinedTieuThuyet);
+        predefinedTieuThuyet.output();
         int choice;
         do {
             System.out.println("Vui lòng chọn loại sách cần thêm.");
