@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.text.DecimalFormat;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class bookLibrary {
@@ -20,6 +21,8 @@ public class bookLibrary {
         bookInventory.put("sachthieunhi", new ArrayList<>());
         bookInventory.put("sachkhac", new ArrayList<>());
         sc = new Scanner(System.in);
+
+        MemoryDemo.addPredefinedBooks(this);
     }
 
     public void countBook(String bookType, BookInput book) {
@@ -75,9 +78,9 @@ public class bookLibrary {
         int stt = 1;
         if (count > 0) {
             System.out.println("Thông tin loại sách này.");
-            System.out.println("+-----+--------------------------+-----------------------+------------------+---------+--------------+------------+-------------+---------------+");
-            System.out.println("| STT |          Tên             |     Thể loại          |   Nhà xuất bản   | Tái bản |  Mã số sách  | Giá tiền   |  Trạng thái | Ngày xuất bản |");
-            System.out.println("+-----+--------------------------+-----------------------+------------------+---------+--------------+------------+-------------+---------------+");
+            System.out.println("+-----+--------------------------+-----------------------+------------------+---------+--------------+------------+-------------+---------------+---------------------+");
+            System.out.println("| STT |          Tên             |     Thể loại          |   Nhà xuất bản   | Tái bản |  Mã số sách  | Giá tiền   |  Trạng thái | Ngày xuất bản |    Thời gian nhập   |");
+            System.out.println("+-----+--------------------------+-----------------------+------------------+---------+--------------+------------+-------------+---------------+---------------------+");
             ArrayList<BookInput> books = bookInventory.getOrDefault(bookType, new ArrayList<>());
             for (BookInput book : books) {
                 String tieuDe = "";
@@ -94,12 +97,12 @@ public class bookLibrary {
                 } else if (book instanceof sachKhac) {
                     tieuDe = ((sachKhac) book).getTieuDe();
                 }
-                System.out.printf("| %-4d| %-25s| %-22s| %-17s| %-8d| %-13s| %-11s| %-12s| %-14s|%n",
+                System.out.printf("| %-4d| %-25s| %-22s| %-17s| %-8d| %-13s| %-11s| %-12s| %-14s| %-16s |%n",
                 stt++, tieuDe, getTypeName(bookType), book.getNhaXuatBan(), book.getSoLanTaiBan(),
                 book.getIdSach(), formatGiaTien(book.getGiaTien())+ "đ",
-                book.getStatus(), book.getNgayXuatBan().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+                book.getStatus(), book.getNgayXuatBan().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),book.getGioHienTai().format(DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy")));
             }
-            System.out.println("+-----+--------------------------+-----------------------+------------------+---------+--------------+------------+-------------+---------------+");
+            System.out.println("+-----+--------------------------+-----------------------+------------------+---------+--------------+------------+-------------+---------------+---------------------+");
 
         } else {
             System.out.println("Không có loại sách này.");
@@ -114,9 +117,9 @@ public class bookLibrary {
         }
 
         System.out.println("Thông tin cho các cuốn sách:");
-        System.out.println("+-----+--------------------------+-----------------------+------------------+---------+--------------+------------+-------------+---------------+");
-        System.out.println("| STT |          Tên             |     Thể loại          |   Nhà xuất bản   | Tái bản |  Mã số sách  | Giá tiền   |  Trạng thái | Ngày xuất bản |");
-        System.out.println("+-----+--------------------------+-----------------------+------------------+---------+--------------+------------+-------------+---------------+");
+        System.out.println("+-----+--------------------------+-----------------------+------------------+---------+--------------+------------+-------------+---------------+---------------------+");
+        System.out.println("| STT |          Tên             |     Thể loại          |   Nhà xuất bản   | Tái bản |  Mã số sách  | Giá tiền   |  Trạng thái | Ngày xuất bản |    Thời gian nhập   |");
+        System.out.println("+-----+--------------------------+-----------------------+------------------+---------+--------------+------------+-------------+---------------+---------------------+");
 
         int stt = 1;
         for (String type : bookInventory.keySet()) {
@@ -137,13 +140,13 @@ public class bookLibrary {
                     tieuDe = ((sachKhac) book).getTieuDe();
                 }
 
-                System.out.printf("| %-4d| %-25s| %-22s| %-17s| %-8d| %-13s| %-11s| %-12s| %-14s|%n",
+                System.out.printf("| %-4d| %-25s| %-22s| %-17s| %-8d| %-13s| %-11s| %-12s| %-14s| %-16s |%n",
                         stt++, tieuDe, getTypeName(type), book.getNhaXuatBan(), book.getSoLanTaiBan(),
                         book.getIdSach(), formatGiaTien(book.getGiaTien())+ "đ",
-                        book.getStatus(), book.getNgayXuatBan().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+                        book.getStatus(), book.getNgayXuatBan().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),book.getGioHienTai().format(DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy")));
             }
         }
-        System.out.println("+-----+--------------------------+-----------------------+------------------+---------+--------------+------------+-------------+---------------+");
+        System.out.println("+-----+--------------------------+-----------------------+------------------+---------+--------------+------------+-------------+---------------+---------------------+");
     }
 
     private String getTypeName(String type) {
