@@ -94,10 +94,21 @@ public class BookInput {
     public void setNgayXuatBan(LocalDate ngayXuatBan) {
         this.ngayXuatBan = ngayXuatBan;
     }
+    public static boolean isValidName(String input) {
+        String regex = "^[a-zA-Z\\s]+$";
+        return input.matches(regex);
+    }
 
     public void input() {
-        System.out.println("Nhập id sách: ");
-        idSach = sc.nextLine();
+        while(true) {
+            System.out.println("Nhập id của sách. ");
+            idSach = sc.nextLine();
+            if(idSach.matches("[a-zA-z0-9]+")) {
+                break;
+            }else {
+                System.out.println("Id không chứa kí tự. Vui lòng nhập lại.");
+            }
+        }
         System.out.println("Chọn nhà xuất bản.");
         System.out.println("1. Kim Đồng");
         System.out.println("2. Lao Động");
@@ -121,13 +132,43 @@ public class BookInput {
                 break;
             default:
                 System.out.println("Nhà xuất bản khác. Vui lòng nhập tên: ");
-                nhaXuatBan = sc.nextLine();
+                do {
+                    System.out.println("Nhập tên của bạn:");
+                    nhaXuatBan = sc.nextLine();
+                    if (!isValidName(nhaXuatBan)) {
+                        System.out.println("Tên không hợp lệ. Vui lòng nhập lại.");
+                    }
+                } while (!isValidName(nhaXuatBan));
                 break;
         }
-        System.out.println("Nhập số lần tái bản: ");
-        soLanTaiBan = sc.nextInt();
-        System.out.println("Nhập giá tiền: ");
-        giaTien = sc.nextLong();
+        while(true) {
+            System.out.println("Nhập số lần tái bản: ");
+            if(sc.hasNextInt()) {
+                soLanTaiBan = sc.nextInt();
+                if(soLanTaiBan > 0) {
+                    break;
+                }else {
+                    System.out.println("Số lần tái bản phải lớn hơn hoặc bằng không. Vui lòng nhập lại.");
+                }
+            }else {
+                System.out.println("Số lần tái bản phải là một số nguyên. Vui lòng nhập lại. ");
+                sc.next();
+            }
+        }
+        while(true) {
+            System.out.println("Nhập giá tiền");
+            if(sc.hasNextLong()) {
+                giaTien = sc.nextLong();
+                if(giaTien > 0) {
+                    break;
+                }else {
+                    System.out.println("Số tiền phải lớn hơn không. Vui lòng nhập lại.");
+                }
+            }else {
+                System.out.println("Số tiền phải là một số nguyên không phải chuỗi. Vui lòng nhập lại.");
+                sc.next();
+            }
+        }
         sc.nextLine();
         do {
             System.out.println("Nhập ngày xuất bản(dd/MM/yyyy): ");
