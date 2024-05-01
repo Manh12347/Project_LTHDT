@@ -3,10 +3,12 @@ package bookManage;
 import java.text.DecimalFormat;
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class BookInput {
+    protected LocalDateTime gioHienTai;
     protected Status status;
     protected String idSach;
     protected String nhaXuatBan;
@@ -15,7 +17,7 @@ public class BookInput {
     protected LocalDate ngayXuatBan;
     protected Scanner sc;
 
-    public BookInput(String idSach, String nhaXuatBan, int soLanTaiBan, long giaTien, String ngayXuatBan, Status status, Scanner scanner) {
+    public BookInput(String idSach, String nhaXuatBan, int soLanTaiBan, long giaTien, String ngayXuatBan, Status status, Scanner scanner,String gioHienTai) {
         this.status = status;
         this.idSach = idSach;
         this.nhaXuatBan = nhaXuatBan;
@@ -23,6 +25,7 @@ public class BookInput {
         this.giaTien = giaTien;
         this.ngayXuatBan = LocalDate.parse(ngayXuatBan, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         this.sc = scanner;
+        this.gioHienTai = LocalDateTime.now();
     }
 
     public BookInput() {
@@ -33,6 +36,7 @@ public class BookInput {
         this.giaTien = 0;
         this.ngayXuatBan = LocalDate.parse("14/12/2005", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         this.sc = new Scanner(System.in);
+        this.gioHienTai = LocalDateTime.now();
     }
 
     public String getIdSach() {
@@ -41,6 +45,14 @@ public class BookInput {
 
     public void setIdSach(String idSach) {
         this.idSach = idSach;
+    }
+
+    public LocalDateTime getGioHienTai() {
+        return gioHienTai;
+    }
+
+    public void setGioHienTai(LocalDateTime gioHienTai) {
+        this.gioHienTai = gioHienTai;
     }
 
     public Status getStatus() {
@@ -147,15 +159,25 @@ public class BookInput {
     }
 
     public void output() {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         System.out.println("Mã số sách là: " + getIdSach());
         System.out.println("Tên nhà xuất bản: " + getNhaXuatBan());
         System.out.println("Số lần tái bản: " + getSoLanTaiBan());
         System.out.println("Giá tiền: " + formatGiaTien(getGiaTien()) + " vnd");
-        System.out.println("Ngày xuất bản: " + getNgayXuatBan().format(dateTimeFormatter));
+        System.out.println("Ngày xuất bản: " + formatDate(getNgayXuatBan()));
         System.out.println("Trạng thái: " + getStatus());
+        System.out.println("Thời gian nhập sách: " + formatDateTime(getGioHienTai()));
     }
 
+    public String formatDateTime(LocalDateTime dateTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm:ss dd-MM-yyyy");
+        return dateTime.format(formatter);
+    }
+
+    public String formatDate(LocalDate date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return date.format(formatter);
+    }
+    
     public String formatGiaTien(double giaTien) {
         DecimalFormat decimalFormat = new DecimalFormat("#,###.###");
         return decimalFormat.format(giaTien);
@@ -163,11 +185,10 @@ public class BookInput {
 
     @Override
     public String toString() {
-        return "BookInput [status=" + status + ", idSach=" + idSach + ", nhaXuatBan=" + nhaXuatBan + ", soLanTaiBan="
-                + soLanTaiBan + ", giaTien=" + giaTien + ", ngayXuatBan=" + ngayXuatBan + ", sc=" + sc + "]";
+        return "BookInput [gioHienTai=" + gioHienTai + ", status=" + status + ", idSach=" + idSach + ", nhaXuatBan="
+                + nhaXuatBan + ", soLanTaiBan=" + soLanTaiBan + ", giaTien=" + giaTien + ", ngayXuatBan=" + ngayXuatBan
+                + ", sc=" + sc + "]";
     }
-
-   
 }
 
 class tieuThuyet extends BookInput {
@@ -363,4 +384,3 @@ class sachKhac extends  BookInput {
         System.out.println("Tiêu đề: " + getTieuDe());
     }
 }
-

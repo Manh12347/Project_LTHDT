@@ -1,6 +1,7 @@
 package bookManage;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class MemoryDemo {
@@ -12,6 +13,7 @@ public class MemoryDemo {
         tieuThuyet1.setGiaTien(50000);
         tieuThuyet1.setNgayXuatBan(LocalDate.parse("24/06/2012", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         tieuThuyet1.setStatus(Status.NOT_LENT_YET);
+        tieuThuyet1.setGioHienTai(LocalDateTime.parse("13:33:14 23/04/2024",DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy")));
         library.countBook("tieuthuyet", tieuThuyet1);
 
         hoiKi hoiki1 = new hoiKi("Khi thơ bé");
@@ -21,6 +23,7 @@ public class MemoryDemo {
         hoiki1.setGiaTien(45000);
         hoiki1.setNgayXuatBan(LocalDate.parse("13/12/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         hoiki1.setStatus(Status.NOT_LENT_YET);
+        hoiki1.setGioHienTai(LocalDateTime.parse("13:35:23 27/04/2024",DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy")));
         library.countBook("hoiki", hoiki1);
 
         kyNangSong kynangsong1 = new kyNangSong("7 Điều cân biết.");
@@ -30,6 +33,7 @@ public class MemoryDemo {
         kynangsong1.setGiaTien(33000);
         kynangsong1.setNgayXuatBan(LocalDate.parse("15/05/2012", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         kynangsong1.setStatus(Status.NOT_LENT_YET);
+        kynangsong1.setGioHienTai(LocalDateTime.parse("13:37:22 29/04/2024",DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy")));
         library.countBook("kynangsong", kynangsong1);
 
         khoaHocvaKienThuc khoahocvakienthuc1 = new khoaHocvaKienThuc("Khoa học lượng tử");
@@ -39,6 +43,7 @@ public class MemoryDemo {
         khoahocvakienthuc1.setGiaTien(534000);
         khoahocvakienthuc1.setNgayXuatBan(LocalDate.parse("01/01/2001", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         khoahocvakienthuc1.setStatus(Status.NOT_LENT_YET);
+        khoahocvakienthuc1.setGioHienTai(LocalDateTime.parse("13:40:22 30/04/2024",DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy")));
         library.countBook("khoahocvakienthuctongquat", khoahocvakienthuc1);
 
         sachThieuNhi sachthieunhi1 = new sachThieuNhi("Tranh chữ cho bé");
@@ -48,6 +53,7 @@ public class MemoryDemo {
         sachthieunhi1.setGiaTien(13200);
         sachthieunhi1.setNgayXuatBan(LocalDate.parse("10/06/2012", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         sachthieunhi1.setStatus(Status.NOT_LENT_YET);
+        sachthieunhi1.setGioHienTai(LocalDateTime.parse("14:15:22 29/04/2024",DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy")));
         library.countBook("sachthieunhi", sachthieunhi1);
 
         sachKhac sachkhac1 = new sachKhac("Trạng Quỷnh", "Truyện Hài");
@@ -57,6 +63,7 @@ public class MemoryDemo {
         sachkhac1.setGiaTien(17000);
         sachkhac1.setNgayXuatBan(LocalDate.parse("04/02/2007", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         sachkhac1.setStatus(Status.NOT_LENT_YET);
+        sachkhac1.setGioHienTai(LocalDateTime.parse("14:23:22 29/04/2024",DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy")));
         library.countBook("sachkhac", sachkhac1);
     }
 }
