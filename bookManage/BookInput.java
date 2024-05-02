@@ -135,10 +135,10 @@ public class BookInput {
                 do {
                     System.out.println("Nhập tên của bạn:");
                     nhaXuatBan = sc.nextLine();
-                    if (!isValidName(nhaXuatBan)) {
+                    if (nhaXuatBan == null) {
                         System.out.println("Tên không hợp lệ. Vui lòng nhập lại.");
                     }
-                } while (!isValidName(nhaXuatBan));
+                } while (nhaXuatBan == null);
                 break;
         }
         while(true) {

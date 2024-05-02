@@ -222,8 +222,11 @@ public class bookLibrary {
                     break;
                 case 7:
                     break;
+                default:
+                    System.out.println("Vui lòng chọn hoạt động đúng với lệnh.");
+                    break;
             }
-        } while (choice != 7);
+        } while (choice > 7);
     }
 
     public void performAction() {
